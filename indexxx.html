@@ -1,0 +1,72 @@
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <div id="eyed"> INI ID</div>
+    <div class="btn">INI Kelas</div>
+    <a href="#hello">INI Href</a>
+
+
+
+    <script>
+        var SweetSelector = (function() {
+                    return {
+                        select: function (result) {
+                            return document.querySelector(result)
+                        }
+                    }
+                })()
+        console.log(SweetSelector.select('#eyed'))
+        console.log(SweetSelector.select('.btn'))
+        console.log(SweetSelector.select('a'))
+        // function DOM() {
+        //     function hide() {
+        //         console.log("haihai")
+        //     }
+        // }
+        var DOM = (function () {
+            return {
+                hide: function (result) {
+                    var div = SweetSelector.select(result);
+                    console.log(div, "=======")
+                    div.style.display = 'none'
+                }, 
+                show: function (result) {
+                    var div = SweetSelector.select(result)
+                    div.style.display ='block'
+                },
+                addClass: function (result, newClass) {
+                    var div = SweetSelector.select(result)
+                    return div.classList.add(newClass)
+                },
+                removeClass: function (result, oldClass) {
+                    var div = SweetSelector.select(result)
+                    return div.classList.remove(oldClass)
+                }
+            }
+        })()
+        DOM.hide('.btn')
+        DOM.show('.btn')
+        DOM.addClass('.btn', 'shadi')
+        DOM.removeClass('.btn', 'shadi')
+        
+        var EventDispatcher = (function(){
+        return {
+            on: function(target, eventName, anonymousFunction){
+                document.addEventListener(eventName, anonymousFunction);
+            },
+            trigger: function(target, eventName){
+                var event = new Event(eventName) 
+                document.dispatchEvent(event);
+            }
+        }
+        })()
+        EventDispatcher.on('.btn','click', function() {console.log("awesome")})
+        EventDispatcher.trigger('.btn', 'click')
+    </script>    
+    
+    
+
+  </body>
+</html>
